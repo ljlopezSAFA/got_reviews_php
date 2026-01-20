@@ -31,10 +31,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for item in items %}
+                {% for item in characters %}
                     <tr>
                         <td>
-                            <input type="checkbox" name="items[]" value="{{ item.id }}">
+                            <input type="checkbox"  id="items[]" name="items[]" value="{{ item.id }}">
                         </td>
                         <td>{{ item.fullName }}</td>
                         <td>{{ item.family }}</td>

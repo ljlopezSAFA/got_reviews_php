@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Character;
+use App\Repository\CategoryRepository;
 use App\Repository\CharacterRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,46 +15,46 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'categories')]
-    public function index(Request $request, CharacterRepository $characterRepository): Response
+    public function index(Request $request,
+                            CharacterRepository $characterRepository,
+                            EntityManagerInterface $entityManager): Response
     {
 
+        if($request->isMethod('GET')){
 
+            $characters = $characterRepository->findAll();
 
+            return $this->render('category/categories.html.twig',[
+                'characters' => $characters,
+            ]);
 
-
-        if ($request->isMethod('POST')) {
-
-//            $category = new Category();
-
-//            $categoria->setNombre($request->request->get('nombre'));
-//            $categoria->setFotoUrl($request->request->get('fotoUrl'));
-
-
-//            $itemsIds = $request->request->get('items');
-//            foreach ($itemsIds as $id) {
-//                if ($id) {
-//                   $character = $characterRepository->find($id);
-//                   $character->addCharacter($character);
-//                }
-//            }
-
-//            $em->persist($categoria);
-//            $em->flush();
-
-            $this->addFlash('success', 'Category created');
-            return $this->redirectToRoute('admin_site');
         }else{
 
-            // Obtenemos todos los characters
-            $items = $characterRepository->findAll();
+            $new_category = new Category();
+            $new_category->setName($request->request->get('name'));
+            $new_category->setImage($request->request->get('image'));
 
-            return $this->render('category/categories.html.twig', [
-                'items' => $items,
-            ]);
+            $characters_selected = $request->request->all('items');
+
+            foreach($characters_selected as $idCharacter){
+
+                $character = $characterRepository->find($idCharacter);
+                if($character){
+                    $new_category->addCharacter($character);
+                }
+            }
+
+            $entityManager->persist($new_category);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_site');
+
         }
 
-
-
-
     }
+
 }
+
+
+
+
