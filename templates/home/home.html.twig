@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Contenedor principal centrado -->
+    <div class="container d-flex flex-column justify-content-start align-items-center vh-100 pt-5">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/34638/PhpstormProjects/got_reviews_php/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/34638/PhpstormProjects/got_reviews_php/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <!-- Primera fila -->
+        <div class="row g-4 justify-content-center w-100">
+            <!-- Rankings -->
+            <div class="col-10 col-md-4">
+                <div class="card text-center text-white bg-dark-blue card-hover" role="button">
+                    <div class="card-body py-5">
+                        <img src="{{ asset('images/rankings.png') }}" alt="Rankings" width="64" height="64"
+                             class="icon-white mb-3">
+                        <h3 class="card-title">Rankings</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Reviews -->
+            <div class="col-10 col-md-4">
+                <div class="card text-center text-white bg-danger card-hover" role="button">
+                    <div class="card-body py-5">
+                        <img src="{{ asset('images/reviews.png') }}" alt="Reviews" width="64" height="64"
+                             class="icon-white mb-3">
+                        <h3 class="card-title">Reviews</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <!-- Segunda fila -->
+        <div class="row g-4 justify-content-center w-100">
+            <!-- Admin -->
+            <div class="col-10 col-md-4">
+                <a href="{{ path('admin_site') }}" class="text-decoration-none text-white">
+                    <div class="card text-center text-white bg-yellow card-hover " role="button">
+                        <div class="card-body py-5">
+                            <img src="{{ asset('images/admin.png') }}" alt="Admin" width="64" height="64"
+                                 class="icon-white mb-3">
+                            <h3 class="card-title">Admin</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Stats -->
+            <div class="col-10 col-md-4">
+                <div class="card text-center text-white bg-blue card-hover" role="button">
+                    <div class="card-body py-5">
+                        <img src="{{ asset('images/stats.png') }}" alt="Stats" width="64" height="64"
+                             class="icon-white mb-3">
+                        <h3 class="card-title">Stats</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

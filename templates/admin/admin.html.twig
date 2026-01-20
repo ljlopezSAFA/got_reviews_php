@@ -1,22 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin Site{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Contenedor principal centrado -->
+    <div class="container d-flex flex-column justify-content-start align-items-center vh-100 pt-5">
 
+        <!-- Primera fila -->
+        <div class="row g-4 justify-content-center w-100">
+            <div class="col-3 col-md-3">
+                <a href="{{ path('categories') }}" class="text-decoration-none text-white">
+                    <div class="card text-center text-white bg-dark-blue card-hover ">
+                        <div class="card-body py-5">
+                            <img src="{{ asset('images/data_load.png') }}" alt="Admin" width="64" height="64"
+                                 class="icon-white mb-3">
+                            <h3 class="card-title">Data Load</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 col-md-3">
+                <a href="{{ path('categories') }}" class="text-decoration-none text-white">
+                    <div class="card text-center text-white bg-yellow card-hover " role="button">
+                        <div class="card-body py-5">
+                            <img src="{{ asset('images/category.png') }}" alt="Admin" width="64" height="64"
+                                 class="icon-white mb-3">
+                            <h3 class="card-title">Categories</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 col-md-3">
+                <a href="" class="text-decoration-none text-white">
+                    <div class="card text-center text-white bg-blue card-hover " role="button">
+                        <div class="card-body py-5">
+                            <img src="{{ asset('images/admin.png') }}" alt="Admin" width="64" height="64"
+                                 class="icon-white mb-3">
+                            <h3 class="card-title"> BrotherHoods</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-3 col-md-3">
+                <div class="card text-center text-white bg-danger card-hover " role="button">
+                    <div class="card-body py-5">
+                        <img src="{{ asset('images/users.png') }}" alt="Admin" width="64" height="64"
+                             class="icon-white mb-3">
+                        <h3 class="card-title">Users Panel</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-        <p>{{ content }}</p>
-
-
-
-
-</div>
 {% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2>Create new category</h2>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="fotoUrl" class="form-label">Category Image</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="https://example.com/foto.jpg" required>
+            </div>
+
+            <h4>Related Characters</h4>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Selection</th>
+                    <th>Name</th>
+                    <th>House</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="items[]" value="{{ item.id }}">
+                        </td>
+                        <td>{{ item.fullName }}</td>
+                        <td>{{ item.family }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="container d-flex flex-column justify-content-start align-items-center ">
+                <button type="submit" class="btn bg-dark-blue mt-3" style="color: #FFFFFF">Save Category</button>
+            </div>
+
+
+
+        </form>
+    </div>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Character;
+use App\Repository\CharacterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,8 +12,18 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class AdminController extends AbstractController
 {
-    #[Route('/admin/character/load', name: 'app_admin')]
-    public function index(HttpClientInterface $httpClient, EntityManagerInterface $entityManager): Response
+
+    #[Route('/admin', name: 'admin_site')]
+    public function index(): Response
+    {
+
+
+        return $this->render('admin/admin.html.twig');
+    }
+
+
+    #[Route('/admin/character/load', name: 'data_load_api')]
+    public function data_load(HttpClientInterface $httpClient, EntityManagerInterface $entityManager): Response
     {
 
         #PETICION A LA API
@@ -29,6 +40,7 @@ final class AdminController extends AbstractController
             $character->setFirtsName($element['firstName']);
             $character->setLastName($element['lastName']);
             $character->setFamily($element['family']);
+            $character->setTitle($element['title']);
             $character->setFullName($element['fullName']);
             $character->setImage($element['image']);
             $character->setImageUrl($element['imageUrl']);
@@ -46,4 +58,41 @@ final class AdminController extends AbstractController
             'content' => $content,
         ]);
     }
+
+
+//    #[Route('/', name: 'categoria_index', methods: ['GET','POST'])]
+//    public function category(Request $request, EntityManagerInterface $em): Response
+//    {
+//        // Crear nueva categoría
+//        $categoria = new Categoria();
+//
+//        // Tomamos los datos manualmente del formulario
+//        if ($request->isMethod('POST')) {
+//            $categoria->setNombre($request->request->get('nombre'));
+//            $categoria->setFotoUrl($request->request->get('fotoUrl'));
+//
+//            // Asociar items seleccionados
+//            $itemsIds = $request->request->get('items', []); // array de ids
+//            foreach ($itemsIds as $id) {
+//                $item = $em->getRepository(Item::class)->find($id);
+//                if ($item) {
+//                    $categoria->addItem($item); // asumiendo relación ManyToMany
+//                }
+//            }
+//
+//            $em->persist($categoria);
+//            $em->flush();
+//
+//            $this->addFlash('success', 'Categoría creada y elementos asociados');
+//            return $this->redirectToRoute('categoria_index');
+//        }
+//
+//        // Obtener todos los items disponibles
+//        $items = $em->getRepository(Item::class)->findAll();
+//
+//        return $this->render('categoria/categories.html.twig', [
+//            'items' => $items,
+//        ]);
+//    }
+
 }
